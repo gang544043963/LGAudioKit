@@ -1,4 +1,4 @@
 dependencies: \
-  /Users/mac/Desktop/WorkPlace/我的代码/LGAudioKit/LGAudioKit/Class/LGSoundRecorder/LGSoundRecorder.m \
-  /Users/mac/Desktop/WorkPlace/我的代码/LGAudioKit/LGAudioKit/Class/LGSoundRecorder/LGSoundRecorder.h \
-  /Users/mac/Desktop/WorkPlace/我的代码/LGAudioKit/LGAudioKit/Class/Vendor/MBProgressHUD/MBProgressHUD.h
+  /Users/mac/Desktop/WorkPlace/git-reporsitory/LGAudioKit/LGAudioKit/Class/LGSoundRecorder/LGSoundRecorder.m \
+  /Users/mac/Desktop/WorkPlace/git-reporsitory/LGAudioKit/LGAudioKit/Class/LGSoundRecorder/LGSoundRecorder.h \
+  /Users/mac/Desktop/WorkPlace/git-reporsitory/LGAudioKit/LGAudioKit/Class/Vendor/MBProgressHUD/MBProgressHUD.h

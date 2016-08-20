@@ -8,16 +8,18 @@
 
 #import "ViewController.h"
 #import "LGTableViewCell.h"
-#import "LGSoundRecorder.h"
+#import "LGMessageModel.h"
+#import "LGAudioKit.h"
 
 #define DocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,LGTableViewCellDelegate,LGSoundRecorderDelegate>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,LGTableViewCellDelegate,LGSoundRecorderDelegate,LGAudioPlayerDelegate>
 
 
 @property (nonatomic, strong) UITableView *chatTableView;
 @property (nonatomic, strong) UIButton    *recordButton;
 @property (nonatomic, weak) NSTimer *timerOf60Second;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
@@ -27,6 +29,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	_dataArray  = [NSMutableArray arrayWithCapacity:0];
+	[LGAudioPlayer sharePlayer].delegate = self;
 	[self initTableView];
 	[self initButton];
 }
@@ -111,6 +115,7 @@
 	}
 	
 	if ([[LGSoundRecorder shareInstance] soundRecordTime] < 61) {
+		[self sendSound];
 		[[LGSoundRecorder shareInstance] stopSoundRecord:self.view];
 	}
 	if (_timerOf60Second) {
@@ -168,6 +173,14 @@
 	return filePath;
 }
 
+- (void)sendSound {
+	LGMessageModel *messageModel = [[LGMessageModel alloc] init];
+	messageModel.soundFilePath = [[LGSoundRecorder shareInstance] soundFilePath];
+	messageModel.seconds = [[LGSoundRecorder shareInstance] soundRecordTime];
+	[self.dataArray addObject:messageModel];
+	[self.chatTableView reloadData];
+}
+
 #pragma mark - LGSoundRecorderDelegate 
 
 - (void)showSoundRecordFailed{
@@ -178,14 +191,43 @@
 	}
 }
 
-- (void)didStopSoundRecordView {
+- (void)didStopSoundRecord {
 
+}
+
+#pragma mark - LGAudioPlayerDelegate
+
+- (void)audioPlayerStateDidChanged:(LGAudioPlayerState)audioPlayerState forIndex:(NSUInteger)index {
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+	LGTableViewCell *voiceMessageCell = [_chatTableView cellForRowAtIndexPath:indexPath];
+	LGVoicePlayState voicePlayState;
+	switch (audioPlayerState) {
+        case LGAudioPlayerStateNormal:
+			voicePlayState = LGVoicePlayStateNormal;
+		break;
+		case LGAudioPlayerStatePlaying:
+			voicePlayState = LGVoicePlayStatePlaying;
+			break;
+		case LGAudioPlayerStateCancel:
+			voicePlayState = LGVoicePlayStateCancel;
+			break;
+			
+		default:
+			break;
+	}
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[voiceMessageCell setVoicePlayState:voicePlayState];
+	});
 }
 
 #pragma mark - LGTableViewCellDelegate
 
 - (void)voiceMessageTaped:(LGTableViewCell *)cell {
-	[cell setVoicePlayState:LGVoicePalyStatePlaying];
+	[cell setVoicePlayState:LGVoicePlayStatePlaying];
+	
+	NSIndexPath *indexPath = [_chatTableView indexPathForCell:cell];
+	LGMessageModel *messageModel = [self.dataArray objectAtIndex:indexPath.row];
+	[[LGAudioPlayer sharePlayer] playAudioWithURLString:messageModel.soundFilePath atIndex:indexPath.row];
 }
 
 #pragma mark - UITableViewDataSource
@@ -195,13 +237,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 10;
+	return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	LGTableViewCell *cell = [[LGTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 	cell.delegate = self;
-	[cell configureCellWithData:10];
+	LGMessageModel *messageModel = [self.dataArray objectAtIndex:indexPath.row];
+	[cell configureCellWithData:messageModel];
 	return cell;
 }
 

@@ -13,17 +13,21 @@
 @protocol LGSoundRecorderDelegate <NSObject>
 
 - (void)showSoundRecordFailed;
-- (void)didStopSoundRecordView;
+- (void)didStopSoundRecord;
 
 @end
 
 @interface LGSoundRecorder : NSObject
 
+@property (nonatomic, copy) NSString *soundFilePath;
 @property (nonatomic, weak) id<LGSoundRecorderDelegate>delegate;
 
 + (LGSoundRecorder *)shareInstance;
 /**
  *  开始录音
+ *
+ *  @param view 展现录音指示框的父视图
+ *  @param path 音频文件保存路径
  */
 - (void)startSoundRecord:(UIView *)view recordPath:(NSString *)path;
 /**
@@ -53,5 +57,6 @@
  */
 - (void)showCountdown:(int)countDown;
 
-- (CGFloat)soundRecordTime;
+- (NSTimeInterval)soundRecordTime;
+
 @end

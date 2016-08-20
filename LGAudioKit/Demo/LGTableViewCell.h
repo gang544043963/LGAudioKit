@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LGMessageModel.h"
 
-typedef NS_ENUM(NSUInteger, LGVoicePalyState){
-	LGVoicePalyStateNormal,/**< 未播放状态 */
-	LGVoicePalyStateDownloading,/**< 正在下载中 */
-	LGVoicePalyStatePlaying,/**< 正在播放 */
-	LGVoicePalyStateCancel,/**< 播放被取消 */
+typedef NS_ENUM(NSUInteger, LGVoicePlayState){
+	LGVoicePlayStateNormal,/**< 未播放状态 */
+	LGVoicePlayStateDownloading,/**< 正在下载中 */
+	LGVoicePlayStatePlaying,/**< 正在播放 */
+	LGVoicePlayStateCancel,/**< 播放被取消 */
 };
 
 @class LGTableViewCell;
@@ -25,9 +26,9 @@ typedef NS_ENUM(NSUInteger, LGVoicePalyState){
 @interface LGTableViewCell : UITableViewCell
 
 @property (nonatomic, assign) NSInteger soundSeconds;
-@property (nonatomic, assign) LGVoicePalyState voicePlayState;
+@property (nonatomic, assign) LGVoicePlayState voicePlayState;
 @property (nonatomic, weak) id<LGTableViewCellDelegate>delegate;
 
-- (void)configureCellWithData:(NSInteger)seconds;
+- (void)configureCellWithData:(LGMessageModel *)messageModel;
 
 @end

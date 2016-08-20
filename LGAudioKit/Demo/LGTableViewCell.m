@@ -77,8 +77,8 @@
 
 #pragma mark - Public Methods
 
-- (void)configureCellWithData:(NSInteger)seconds {
-	self.soundSeconds = seconds;
+- (void)configureCellWithData:(LGMessageModel *)messageModel {
+	self.soundSeconds = messageModel.seconds;
 	self.messageVoiceSecondsLabel.text = [NSString stringWithFormat:@"%ld''",(long)self.soundSeconds];
 	[self setNeedsUpdateConstraints];
 }
@@ -110,17 +110,17 @@
 
 #pragma mark - Setters 
 
-- (void)setVoicePlayState:(LGVoicePalyState)voicePlayState {
+- (void)setVoicePlayState:(LGVoicePlayState)voicePlayState {
 	if (_voicePlayState != voicePlayState) {
 		_voicePlayState = voicePlayState;
 	}
 	self.messageVoiceSecondsLabel.hidden = NO;
 	self.messageVoiceStatusImageView.hidden = NO;
 	
-	if (_voicePlayState == LGVoicePalyStatePlaying) {
+	if (_voicePlayState == LGVoicePlayStatePlaying) {
 		self.messageVoiceStatusImageView.highlighted = YES;
 		[self.messageVoiceStatusImageView startAnimating];
-	}else if (_voicePlayState == LGVoicePalyStateDownloading) {
+	}else if (_voicePlayState == LGVoicePlayStateDownloading) {
 		self.messageVoiceSecondsLabel.hidden = YES;
 		self.messageVoiceStatusImageView.hidden = YES;
 	}else {

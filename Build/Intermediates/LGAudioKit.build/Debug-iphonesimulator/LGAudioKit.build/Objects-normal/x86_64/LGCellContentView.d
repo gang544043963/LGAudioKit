@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/mac/Desktop/WorkPlace/我的代码/LGAudioKit/LGAudioKit/Demo/LGCellContentView.m \
-  /Users/mac/Desktop/WorkPlace/我的代码/LGAudioKit/LGAudioKit/Demo/LGCellContentView.h
+  /Users/mac/Desktop/WorkPlace/git-reporsitory/LGAudioKit/LGAudioKit/Demo/LGCellContentView.m \
+  /Users/mac/Desktop/WorkPlace/git-reporsitory/LGAudioKit/LGAudioKit/Demo/LGCellContentView.h

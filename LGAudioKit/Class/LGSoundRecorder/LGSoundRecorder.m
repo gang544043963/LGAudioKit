@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSString *recordPath;
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSTimer *levelTimer;
-@property (nonatomic, assign) NSInteger recordTime;
 //Views
 @property (nonatomic, strong) UIImageView *imageViewAnimation;
 @property (nonatomic, strong) UIImageView *talkPhone;
@@ -74,8 +73,8 @@
 		} else {
 			[view.window addSubview:_HUD];
 		}
-		if (_delegate&&[_delegate respondsToSelector:@selector(didStopSoundRecordView)]) {
-			[_delegate didStopSoundRecordView];
+		if (_delegate&&[_delegate respondsToSelector:@selector(didStopSoundRecord)]) {
+			[_delegate didStopSoundRecord];
 		}
 	} else {
 		[self deleteRecord];
@@ -127,16 +126,15 @@
 	_textLable.text = @"说话时间太短";
 	_textLable.backgroundColor = [UIColor clearColor];
 	
-	[self performSelector:@selector(stopSoundRecordView:) withObject:view afterDelay:1.5f];
+	[self performSelector:@selector(stopSoundRecord:) withObject:view afterDelay:1.5f];
 }
 
 - (void)showCountdown:(int)countDown{
 	_textLable.text = [NSString stringWithFormat:@"还可以说%d秒",countDown];
 }
 
-- (CGFloat)soundRecordTime {
-	self.recordTime = _recorder.currentTime;
-	return self.recordTime;
+- (NSTimeInterval)soundRecordTime {
+	return _recorder.currentTime;
 }
 
 #pragma mark - Private Methods
@@ -309,6 +307,10 @@
 	//4 采样位数  默认 16
 	[recordSetting setObject:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
 	return recordSetting;
+}
+
+- (NSString *)soundFilePath {
+	return self.recordPath;
 }
 
 @end
