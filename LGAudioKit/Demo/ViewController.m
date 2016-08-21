@@ -10,6 +10,7 @@
 #import "LGTableViewCell.h"
 #import "LGMessageModel.h"
 #import "LGAudioKit.h"
+#import "Masonry.h"
 
 #define DocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
@@ -31,6 +32,7 @@
 	[super viewDidLoad];
 	_dataArray  = [NSMutableArray arrayWithCapacity:0];
 	[LGAudioPlayer sharePlayer].delegate = self;
+	self.view.backgroundColor = [UIColor brownColor];
 	[self initTableView];
 	[self initButton];
 }
@@ -40,14 +42,27 @@
 	// Dispose of any resources that can be recreated.
 }
 
+- (void)updateViewConstraints {
+	[_chatTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.view.mas_top).with.offset(20);
+		make.left.equalTo(self.view.mas_left).with.offset(10);
+		make.right.equalTo(self.view.mas_right).with.offset(-10);
+		make.bottom.equalTo(self.view.mas_bottom).with.offset(-70);
+	}];
+	[super updateViewConstraints];
+}
+
 #pragma mark - Initialize
 
 - (void)initTableView {
 	_chatTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-//	_chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	_chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	_chatTableView.delegate = self;
 	_chatTableView.dataSource = self;
-	_chatTableView.backgroundColor = [UIColor clearColor];
+	_chatTableView.backgroundColor = [UIColor whiteColor];
+	_chatTableView.layer.cornerRadius = 5;
+	_chatTableView.layer.masksToBounds = YES;
+	_chatTableView.tableHeaderView = nil;
 	[self.view addSubview:_chatTableView];
 }
 
@@ -87,7 +102,7 @@
 	}
 	if (isAllow) {
 //		//停止播放
-//		[[XMNAVAudioPlayer sharePlayer] stopAudioPlayer];
+		[[LGAudioPlayer sharePlayer] stopAudioPlayer];
 //		//开始录音
 		[[LGSoundRecorder shareInstance] startSoundRecord:self.view recordPath:[self recordPath]];
 		//开启定时器
@@ -153,7 +168,19 @@
 }
 
 - (void)sixtyTimeStopSendVodio {
-	
+	int countDown = 60 - [[LGSoundRecorder shareInstance] soundRecordTime];
+	NSLog(@"countDown is %d soundRecordTime is %f",countDown,[[LGSoundRecorder shareInstance] soundRecordTime]);
+	if (countDown <= 10) {
+		[[LGSoundRecorder shareInstance] showCountdown:countDown - 1];
+	}
+	if ([[LGSoundRecorder shareInstance] soundRecordTime] >= 60 && [[LGSoundRecorder shareInstance] soundRecordTime] <= 61) {
+		
+		if (_timerOf60Second) {
+			[_timerOf60Second invalidate];
+			_timerOf60Second = nil;
+		}
+		[self.recordButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+	}
 }
 
 /**
@@ -247,6 +274,23 @@
 	[cell configureCellWithData:messageModel];
 	return cell;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 60)];
+	textView.backgroundColor = [UIColor redColor];
+	textView.text = @"欢迎使用本框架\n\n如果在使用过程中遇到问题请及时提issue\n博客:http://blog.csdn.net/gang544043963";
+	textView.textAlignment = NSTextAlignmentCenter;
+	textView.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:14];
+	return textView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 100;
+}
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//	return @"adfasdf";
+//}
 
 #pragma mark - UITableViewDelegate
 
