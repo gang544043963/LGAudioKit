@@ -28,6 +28,15 @@ NSString *const kXMNAudioDataKey;
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
 }
 
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		_audioDataOperationQueue = [[NSOperationQueue alloc] init];
+		_index = NSUIntegerMax;
+	}
+	return self;
+}
+
 + (instancetype)sharePlayer{
 	static dispatch_once_t onceToken;
 	static id shareInstance;
