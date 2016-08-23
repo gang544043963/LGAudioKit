@@ -135,12 +135,9 @@ NSString *const kXMNAudioDataKey;
 }
 
 - (void)proximityStateChanged:(NSNotification *)notification {
-	//如果此时手机靠近面部放在耳朵旁，那么声音将通过听筒输出，并将屏幕变暗
 	if ([[UIDevice currentDevice] proximityState] == YES) {
-		NSLog(@"Device is close to user");
 		[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
 	}else {
-		NSLog(@"Device is not close to user");
 		[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 	}
 }

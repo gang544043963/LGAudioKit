@@ -224,12 +224,13 @@
 - (void)startRecord {
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	NSError *err = nil;
+	//设置AVAudioSession
 	[audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
 	if(err) {
 		return;
 	}
 	
-	//Make the default sound route for the session be to use the speaker
+	//设置录音输入源
 	UInt32 doChangeDefaultRoute = 1;
 	AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (doChangeDefaultRoute), &doChangeDefaultRoute);
 	err = nil;
@@ -237,16 +238,18 @@
 	if(err) {
 		return;
 	}
+	//设置文件保存路径和名称
 	NSString *fileName = [NSString stringWithFormat:@"/voice-%5.2f.caf", [[NSDate date] timeIntervalSince1970] ];
 	self.recordPath = [self.recordPath stringByAppendingPathComponent:fileName];
 	NSURL *recordedFile = [NSURL fileURLWithPath:self.recordPath];
 	NSDictionary *dic = [self recordingSettings];
+	//初始化AVAudioRecorder
 	err = nil;
 	_recorder = [[AVAudioRecorder alloc] initWithURL:recordedFile settings:dic error:&err];
 	if(_recorder == nil) {
 		return;
 	}
-	
+	//准备和开始录音
 	[_recorder prepareToRecord];
 	self.recorder.meteringEnabled = YES;
 	[self.recorder record];
