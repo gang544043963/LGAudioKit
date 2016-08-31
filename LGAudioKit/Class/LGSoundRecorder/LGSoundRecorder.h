@@ -59,4 +59,13 @@
 
 - (NSTimeInterval)soundRecordTime;
 
+/**
+ *  caf文件转换为amr。预留方法，需要转换格式的童靴可以直接使用
+ *
+ *  @param fielPath caf文件路径
+ *
+ *  @return amr文件的二进制数据
+ */
+- (NSData *)convertCAFtoAMR:(NSString *)fielPath;
+
 @end

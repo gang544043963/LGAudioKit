@@ -8,6 +8,7 @@
 
 #import "LGSoundRecorder.h"
 #import "MBProgressHUD.h"
+#include "amrFileCodec.h"
 
 #pragma clang diagnostic ignored "-Wdeprecated"
 
@@ -314,6 +315,14 @@
 
 - (NSString *)soundFilePath {
 	return self.recordPath;
+}
+
+#pragma mark - amr转换方法
+
+- (NSData *)convertCAFtoAMR:(NSString *)fielPath {
+	NSData *data = [NSData dataWithContentsOfFile:fielPath];
+	data = EncodeWAVEToAMR(data,1,16);
+	return data;
 }
 
 @end
