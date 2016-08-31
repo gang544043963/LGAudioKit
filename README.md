@@ -14,6 +14,11 @@
     录音控件：'LGSoundRecorder'
 
     播放控件：'LGSoundPlayer'
+    
+- 录音文件格式为.caf，提供转amr方法，可转成amr发给安卓
+
+- 播放语音格式支持：amr、caf、wav
+    
 - 具体的使用细节请参考Demo中的ViewController.m
 
 -  语音录放的一些简单分析请参考 [iOS通信软件中的语音录制与播放 ](http://blog.csdn.net/gang544043963/article/details/52266903)
