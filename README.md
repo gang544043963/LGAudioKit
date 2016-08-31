@@ -16,5 +16,7 @@
     播放控件：'LGSoundPlayer'
 - 具体的使用细节请参考Demo中的ViewController.m
 
+-  语音录放的一些简单分析请参考 [iOS通信软件中的语音录制与播放 ](http://blog.csdn.net/gang544043963/article/details/52266903)
+
 ##环境支持
 - iOS7及以上
