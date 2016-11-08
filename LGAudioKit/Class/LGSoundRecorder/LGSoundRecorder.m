@@ -85,11 +85,19 @@
 		}
 	}
 	[self removeHUD];
+	//恢复外部正在播放的音乐
+	[[AVAudioSession sharedInstance] setActive:NO
+									 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+										 error:nil];
 }
 
 - (void)soundRecordFailed:(UIView *)view {
 	[self.recorder stop];
 	[self removeHUD];
+	//恢复外部正在播放的音乐
+	[[AVAudioSession sharedInstance] setActive:NO
+									 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+										 error:nil];
 }
 
 - (void)readyCancelSound {

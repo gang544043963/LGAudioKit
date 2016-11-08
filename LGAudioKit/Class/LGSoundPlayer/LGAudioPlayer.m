@@ -12,6 +12,8 @@
 #import <objc/runtime.h>
 #include "amrFileCodec.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated"
+
 NSString *const kXMNAudioDataKey;
 
 @interface LGAudioPlayer()<AVAudioPlayerDelegate>
@@ -81,6 +83,10 @@ NSString *const kXMNAudioDataKey;
 		_audioPlayer.delegate = nil;
 		_audioPlayer = nil;
 		[[LGAudioPlayer sharePlayer] setAudioPlayerState:LGAudioPlayerStateCancel];
+		//恢复外部正在播放的音乐
+		[[AVAudioSession sharedInstance] setActive:NO
+										 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+											 error:nil];
 	}
 }
 
