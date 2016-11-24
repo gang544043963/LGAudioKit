@@ -543,7 +543,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhou qianren (C9LR3LDBA9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: peng Oliver (GW4AS6447M)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LGAudioKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -551,9 +551,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LGAudioKit/Class/Vendor/AMR/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.aaa;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jj.TKLobby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e38d76ee-fb66-4ed9-9383-a081d1eb9069";
+				PROVISIONING_PROFILE = "52820a27-7ff8-4617-a1fc-c22093b7c284";
+				PROVISIONING_PROFILE_SPECIFIER = lordDev;
 			};
 			name = Debug;
 		};
@@ -561,7 +562,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhou qianren (C9LR3LDBA9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: peng Oliver (GW4AS6447M)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LGAudioKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -569,9 +570,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LGAudioKit/Class/Vendor/AMR/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.aaa;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jj.TKLobby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e38d76ee-fb66-4ed9-9383-a081d1eb9069";
+				PROVISIONING_PROFILE = "52820a27-7ff8-4617-a1fc-c22093b7c284";
+				PROVISIONING_PROFILE_SPECIFIER = lordDev;
 			};
 			name = Release;
 		};
