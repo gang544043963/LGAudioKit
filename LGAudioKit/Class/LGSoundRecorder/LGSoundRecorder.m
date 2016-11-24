@@ -85,6 +85,7 @@
 		}
 	}
 	[self removeHUD];
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
 	//恢复外部正在播放的音乐
 	[[AVAudioSession sharedInstance] setActive:NO
 									 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
@@ -94,6 +95,7 @@
 - (void)soundRecordFailed:(UIView *)view {
 	[self.recorder stop];
 	[self removeHUD];
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
 	//恢复外部正在播放的音乐
 	[[AVAudioSession sharedInstance] setActive:NO
 									 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation

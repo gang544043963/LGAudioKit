@@ -83,6 +83,7 @@ NSString *const kXMNAudioDataKey;
 		_audioPlayer.delegate = nil;
 		_audioPlayer = nil;
 		[[LGAudioPlayer sharePlayer] setAudioPlayerState:LGAudioPlayerStateCancel];
+		[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
 		//恢复外部正在播放的音乐
 		[[AVAudioSession sharedInstance] setActive:NO
 										 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
@@ -110,8 +111,8 @@ NSString *const kXMNAudioDataKey;
 	return audioData;
 }
 - (void)playAudioWithData:(NSData *)audioData {
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
 	NSString *audioURLString = objc_getAssociatedObject(audioData, &kXMNAudioDataKey);
-	
 	if (![[NSString stringWithFormat:@"%@_%ld",self.URLString,self.index] isEqualToString:audioURLString]) {
 		return;
 	}
