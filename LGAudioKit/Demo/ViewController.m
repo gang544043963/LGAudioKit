@@ -12,6 +12,7 @@
 #import "LGAudioKit.h"
 #import "Masonry.h"
 
+#define SOUND_RECORD_LIMIT 60
 #define DocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,LGTableViewCellDelegate,LGSoundRecorderDelegate,LGAudioPlayerDelegate>
@@ -120,6 +121,9 @@
  *  录音结束
  */
 - (void)confirmRecordVoice {
+	if ([[LGSoundRecorder shareInstance] soundRecordTime] == 0) {
+		return;//60s自动发送后，松开手走这里
+	}
 	if ([[LGSoundRecorder shareInstance] soundRecordTime] < 1.0f) {
 		if (_timerOf60Second) {
 			[_timerOf60Second invalidate];
@@ -167,12 +171,12 @@
 }
 
 - (void)sixtyTimeStopAndSendVedio {
-	int countDown = 60 - [[LGSoundRecorder shareInstance] soundRecordTime];
+	int countDown = SOUND_RECORD_LIMIT - [[LGSoundRecorder shareInstance] soundRecordTime];
 	NSLog(@"countDown is %d soundRecordTime is %f",countDown,[[LGSoundRecorder shareInstance] soundRecordTime]);
 	if (countDown <= 10) {
 		[[LGSoundRecorder shareInstance] showCountdown:countDown];
 	}
-	if ([[LGSoundRecorder shareInstance] soundRecordTime] >= 60 && [[LGSoundRecorder shareInstance] soundRecordTime] <= 61) {
+	if ([[LGSoundRecorder shareInstance] soundRecordTime] >= SOUND_RECORD_LIMIT && [[LGSoundRecorder shareInstance] soundRecordTime] <= SOUND_RECORD_LIMIT + 1) {
 		
 		if (_timerOf60Second) {
 			[_timerOf60Second invalidate];
