@@ -17,7 +17,6 @@
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,LGTableViewCellDelegate,LGSoundRecorderDelegate,LGAudioPlayerDelegate>
 
-
 @property (nonatomic, strong) UITableView *chatTableView;
 @property (nonatomic, strong) UIButton    *recordButton;
 @property (nonatomic, weak) NSTimer *timerOf60Second;
@@ -290,10 +289,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	return 100;
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//	return @"adfasdf";
-//}
 
 #pragma mark - UITableViewDelegate
 
