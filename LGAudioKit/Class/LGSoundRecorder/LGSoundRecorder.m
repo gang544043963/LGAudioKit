@@ -64,7 +64,7 @@
 	if (self.recorder) {
 		[self.recorder stop];
 	}
-	if (times >= 1) {
+	if (times >= 2.5) {//1 + 1.5 = 2.5
 		if (view == nil) {
 			view = [[[UIApplication sharedApplication] windows] lastObject];
 		}

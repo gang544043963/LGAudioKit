@@ -110,7 +110,7 @@
 			[_timerOf60Second invalidate];
 			_timerOf60Second = nil;
 		}
-		_timerOf60Second = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(sixtyTimeStopSendVodio) userInfo:nil repeats:YES];
+		_timerOf60Second = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(sixtyTimeStopAndSendVedio) userInfo:nil repeats:YES];
 	} else {
 		
 	}
@@ -129,10 +129,9 @@
 		return;
 	}
 	
-	if ([[LGSoundRecorder shareInstance] soundRecordTime] < 61) {
-		[self sendSound];
-		[[LGSoundRecorder shareInstance] stopSoundRecord:self.view];
-	}
+	[self sendSound];
+	[[LGSoundRecorder shareInstance] stopSoundRecord:self.view];
+	
 	if (_timerOf60Second) {
 		[_timerOf60Second invalidate];
 		_timerOf60Second = nil;
@@ -167,11 +166,11 @@
 	[[LGSoundRecorder shareInstance] showShotTimeSign:self.view];
 }
 
-- (void)sixtyTimeStopSendVodio {
+- (void)sixtyTimeStopAndSendVedio {
 	int countDown = 60 - [[LGSoundRecorder shareInstance] soundRecordTime];
 	NSLog(@"countDown is %d soundRecordTime is %f",countDown,[[LGSoundRecorder shareInstance] soundRecordTime]);
 	if (countDown <= 10) {
-		[[LGSoundRecorder shareInstance] showCountdown:countDown - 1];
+		[[LGSoundRecorder shareInstance] showCountdown:countDown];
 	}
 	if ([[LGSoundRecorder shareInstance] soundRecordTime] >= 60 && [[LGSoundRecorder shareInstance] soundRecordTime] <= 61) {
 		
