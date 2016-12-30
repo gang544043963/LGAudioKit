@@ -121,6 +121,7 @@
  */
 - (void)confirmRecordVoice {
 	if ([[LGSoundRecorder shareInstance] soundRecordTime] == 0) {
+		[self cancelRecordVoice];
 		return;//60s自动发送后，松开手走这里
 	}
 	if ([[LGSoundRecorder shareInstance] soundRecordTime] < 1.0f) {

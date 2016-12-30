@@ -64,7 +64,7 @@
 	if (self.recorder) {
 		[self.recorder stop];
 	}
-	if (times >= 2.5) {//1 + 1.5 = 2.5
+	if (times >= 1) {
 		if (view == nil) {
 			view = [[[UIApplication sharedApplication] windows] lastObject];
 		}
@@ -238,15 +238,16 @@
 	//设置AVAudioSession
 	[audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
 	if(err) {
+		[self soundRecordFailed:nil];
 		return;
 	}
 	
 	//设置录音输入源
 	UInt32 doChangeDefaultRoute = 1;
 	AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (doChangeDefaultRoute), &doChangeDefaultRoute);
-	err = nil;
 	[audioSession setActive:YES error:&err];
 	if(err) {
+		[self soundRecordFailed:nil];
 		return;
 	}
 	//设置文件保存路径和名称
@@ -258,6 +259,7 @@
 	err = nil;
 	_recorder = [[AVAudioRecorder alloc] initWithURL:recordedFile settings:dic error:&err];
 	if(_recorder == nil) {
+		[self soundRecordFailed:nil];
 		return;
 	}
 	//准备和开始录音
