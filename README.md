@@ -1,4 +1,7 @@
 # LGAudioKit
+
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()   [![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)]()
+
 简单易用的语音录制、播放控件。流程和界面参考微信（如果对您有帮助，记得star，动力源自鼓励）
 
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/C81B65C4-5EB1-4FE9-AF3E-E234132300C6.jpeg?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
