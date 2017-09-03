@@ -1,6 +1,6 @@
 # LGAudioKit
 
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()   [![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)]()
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()   [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/GIKICoder/GDataBase/master/LICENSE)&nbsp;
 
 简单易用的语音录制、播放控件。流程和界面参考微信（如果对您有帮助，记得star，动力源自鼓励）
 
