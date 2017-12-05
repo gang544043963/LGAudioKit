@@ -110,6 +110,7 @@ NSString *const kXMNAudioDataKey;
 	
 	return audioData;
 }
+
 - (void)playAudioWithData:(NSData *)audioData {
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
 	NSString *audioURLString = objc_getAssociatedObject(audioData, &kXMNAudioDataKey);
