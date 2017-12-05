@@ -92,7 +92,6 @@ NSString *const kXMNAudioDataKey;
 }
 
 #pragma mark - Private Methods
-
 - (NSData *)audioDataFromURLString:(NSString *)URLString atIndex:(NSUInteger)index{
 	NSData *audioData;
 
