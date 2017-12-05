@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, LGAudioPlayerState){
-	LGAudioPlayerStateNormal = 0,/**< 未播放状态 */
-	LGAudioPlayerStatePlaying = 2,/**< 正在播放 */
-	LGAudioPlayerStateCancel = 3,/**< 播放被取消 */
+	LGAudioPlayerStateNormal = 0,/** 未播放状态 */
+	LGAudioPlayerStatePlaying = 2,/** 正在播放 */
+	LGAudioPlayerStateCancel = 3,/** 播放被取消 */
 };
 
 @protocol LGAudioPlayerDelegate <NSObject>
