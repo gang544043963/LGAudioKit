@@ -64,27 +64,30 @@
 	if (self.recorder) {
 		[self.recorder stop];
 	}
+	
+	if (view == nil) {
+		view = [[[UIApplication sharedApplication] windows] lastObject];
+	}
+	if ([view isKindOfClass:[UIWindow class]]) {
+		[view addSubview:_HUD];
+	} else {
+		[view.window addSubview:_HUD];
+	}
+	
 	if (times >= 1) {
-		if (view == nil) {
-			view = [[[UIApplication sharedApplication] windows] lastObject];
-		}
-		
-		if ([view isKindOfClass:[UIWindow class]]) {
-			[view addSubview:_HUD];
-		} else {
-			[view.window addSubview:_HUD];
-		}
 		if (_delegate&&[_delegate respondsToSelector:@selector(didStopSoundRecord)]) {
 			[_delegate didStopSoundRecord];
 		}
+		[self removeHUD];
 	} else {
-		[self deleteRecord];
-		[self.recorder stop];
+		if (self.recorder) {
+			[self.recorder deleteRecording];
+		}
 		if ([_delegate respondsToSelector:@selector(showSoundRecordFailed)]) {
 			[_delegate showSoundRecordFailed];
 		}
+		[self performSelector:@selector(removeHUD) withObject:nil afterDelay:0.8f];
 	}
-	[self removeHUD];
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
 	//恢复外部正在播放的音乐
 	[[AVAudioSession sharedInstance] setActive:NO
@@ -137,7 +140,7 @@
 	_textLable.text = @"说话时间太短";
 	_textLable.backgroundColor = [UIColor clearColor];
 	
-	[self performSelector:@selector(stopSoundRecord:) withObject:view afterDelay:1.5f];
+	[self stopSoundRecord:view];	
 }
 
 - (void)showCountdown:(int)countDown{
@@ -272,17 +275,6 @@
 		self.levelTimer = nil;
 	}
 	self.levelTimer = [NSTimer scheduledTimerWithTimeInterval: 0.0001 target: self selector: @selector(levelTimerCallback:) userInfo: nil repeats: YES];
-}
-
-- (void)deleteRecord {
-	if (self.recorder) {
-		[self.recorder stop];
-		[self.recorder deleteRecording];
-	}
-	
-	if (self.HUD) {
-		[self.HUD hide:NO];
-	}
 }
 
 - (void)levelTimerCallback:(NSTimer *)timer {
