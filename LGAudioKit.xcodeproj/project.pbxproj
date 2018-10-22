@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CE63AE1B1D6837E300B7AA2B /* LGSoundRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE63AE1A1D6837E300B7AA2B /* LGSoundRecorder.m */; };
-		CE63AE1F1D683AB900B7AA2B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CE63AE1E1D683AB900B7AA2B /* MBProgressHUD.m */; };
 		CE63AE211D6843AB00B7AA2B /* toast_microphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63AE201D6843AB00B7AA2B /* toast_microphone@2x.png */; };
 		CE63AE231D6843C700B7AA2B /* toast_cancelsend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63AE221D6843C700B7AA2B /* toast_cancelsend@2x.png */; };
 		CE63AE251D6843E500B7AA2B /* toast_timeshort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63AE241D6843E500B7AA2B /* toast_timeshort@2x.png */; };
@@ -48,8 +47,6 @@
 /* Begin PBXFileReference section */
 		CE63AE191D6837E300B7AA2B /* LGSoundRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSoundRecorder.h; sourceTree = "<group>"; };
 		CE63AE1A1D6837E300B7AA2B /* LGSoundRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSoundRecorder.m; sourceTree = "<group>"; };
-		CE63AE1D1D683AB900B7AA2B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		CE63AE1E1D683AB900B7AA2B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		CE63AE201D6843AB00B7AA2B /* toast_microphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toast_microphone@2x.png"; sourceTree = "<group>"; };
 		CE63AE221D6843C700B7AA2B /* toast_cancelsend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toast_cancelsend@2x.png"; sourceTree = "<group>"; };
 		CE63AE241D6843E500B7AA2B /* toast_timeshort@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toast_timeshort@2x.png"; sourceTree = "<group>"; };
@@ -128,15 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE63AE1C1D683AB900B7AA2B /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				CE63AE1D1D683AB900B7AA2B /* MBProgressHUD.h */,
-				CE63AE1E1D683AB900B7AA2B /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
 		CE6884361D68AB9600684A3F /* AMR */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				CE6884361D68AB9600684A3F /* AMR */,
-				CE63AE1C1D683AB900B7AA2B /* MBProgressHUD */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -418,7 +405,6 @@
 				CEAB59321D6804C80026048C /* NSArray+MASAdditions.m in Sources */,
 				CEAB59381D6804EB0026048C /* LGTableViewCell.m in Sources */,
 				CEAB590F1D6802C30026048C /* ViewController.m in Sources */,
-				CE63AE1F1D683AB900B7AA2B /* MBProgressHUD.m in Sources */,
 				CEAB58F51D6800D10026048C /* AppDelegate.m in Sources */,
 				CEAB592F1D6804C80026048C /* MASLayoutConstraint.m in Sources */,
 				CEAB58F21D6800D10026048C /* main.m in Sources */,
