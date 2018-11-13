@@ -90,19 +90,23 @@
 	}
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
 	//恢复外部正在播放的音乐
-	[[AVAudioSession sharedInstance] setActive:NO
-									 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
-										 error:nil];
+    [[AVAudioSession sharedInstance] setActive:NO
+                                   withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+                                         error:nil];
 }
 
 - (void)soundRecordFailed:(UIView *)view {
+    if (self.levelTimer) {
+        [self.levelTimer invalidate];
+        self.levelTimer = nil;
+    }
 	[self.recorder stop];
 	[self removeHUD];
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
 	//恢复外部正在播放的音乐
-	[[AVAudioSession sharedInstance] setActive:NO
-									 withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
-										 error:nil];
+    [[AVAudioSession sharedInstance] setActive:NO
+                                   withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+                                         error:nil];
 }
 
 - (void)readyCancelSound {

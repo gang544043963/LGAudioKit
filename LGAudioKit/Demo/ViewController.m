@@ -101,9 +101,9 @@
 		}];
 	}
 	if (isAllow) {
-//		//停止播放
+		//停止播放
 		[[LGAudioPlayer sharePlayer] stopAudioPlayer];
-//		//开始录音
+		//开始录音
 		[[LGSoundRecorder shareInstance] startSoundRecord:self.view recordPath:[self recordPath]];
 		//开启定时器
 		if (_timerOf60Second) {

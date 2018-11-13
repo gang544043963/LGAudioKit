@@ -35,21 +35,21 @@
  */
 - (void)stopSoundRecord:(UIView *)view;
 /**
- *  更新录音显示状态,手指向上滑动后 提示松开取消录音
+ *  录音失败/取消录音
  */
 - (void)soundRecordFailed:(UIView *)view;
 /**
- *  更新录音状态,手指重新滑动到范围内,提示向上取消录音
+ *  提示‘松开手指，取消录音’
  */
 - (void)readyCancelSound;
 /**
- *  更新录音状态,手指重新滑动到范围内,提示向上取消录音
+ *  更新录音状态,手指重新滑动到按钮范围内,提示向上取消录音
  */
 - (void)resetNormalRecord;
 /**
  *  录音时间过短
  */
-- (void)showShotTimeSign:(UIView *)view ;
+- (void)showShotTimeSign:(UIView *)view;
 /**
  *  最后10秒，显示你还可以说X秒
  *
