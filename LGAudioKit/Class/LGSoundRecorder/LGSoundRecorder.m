@@ -7,7 +7,6 @@
 //
 
 #import "LGSoundRecorder.h"
-#import "MBProgressHUD.h"
 #include "amrFileCodec.h"
 
 #pragma clang diagnostic ignored "-Wdeprecated"
@@ -16,7 +15,7 @@
 
 @interface LGSoundRecorder()
 
-@property (nonatomic, strong) MBProgressHUD *HUD;
+@property (nonatomic, strong) UIView *HUD;
 @property (nonatomic, strong) NSString *recordPath;
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSTimer *levelTimer;
@@ -166,14 +165,25 @@
 		view = [[[UIApplication sharedApplication] windows] lastObject];
 	}
 	if (_HUD == nil) {
-		_HUD = [[MBProgressHUD alloc] initWithView:view];
-		_HUD.opacity = 0.4;
-		
+        CGFloat hubWidth = 180;
+        CGFloat hubHeight = 160;
+        CGFloat hubX = (view.frame.size.width - hubWidth) / 2;
+        CGFloat hubY = (view.frame.size.height - hubHeight) / 2;
+        CGFloat cvWidth = 130;
+        CGFloat cvHeight = 120;
+        CGFloat cvX = (hubWidth - cvWidth) / 2;
+        CGFloat cvY = (hubHeight - cvHeight) / 2;
+        
+        _HUD = [[UIView alloc] initWithFrame:CGRectMake(hubX, hubY, hubWidth, hubHeight)];
+        _HUD.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.38];
+        _HUD.layer.cornerRadius = 12;
+        _HUD.layer.masksToBounds = true;
+
 		CGFloat left = 22;
 		CGFloat top = 0;
 		top = 18;
 		
-		UIView *cv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 130, 120)];
+		UIView *cv = [[UIView alloc] initWithFrame:CGRectMake(cvX, cvY, cvWidth, cvHeight)];
 		
 		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(left, top, 37, 70)];
 		_talkPhone = imageView;
@@ -219,17 +229,13 @@
 		_textLable.text = @"手指上滑，取消发送";
 		[cv addSubview:_textLable];
 		
-		_HUD.customView = cv;
-		
-		// Set custom view mode
-		_HUD.mode = MBProgressHUDModeCustomView;
+        [_HUD addSubview:cv];
 	}
 	if ([view isKindOfClass:[UIWindow class]]) {
 		[view addSubview:_HUD];
 	} else {
 		[view.window addSubview:_HUD];
 	}
-	[_HUD show:YES];
 }
 
 - (void)removeHUD {
