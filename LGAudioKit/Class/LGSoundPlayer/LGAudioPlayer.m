@@ -95,7 +95,7 @@ NSString *const kXMNAudioDataKey;
 - (NSData *)audioDataFromURLString:(NSString *)URLString atIndex:(NSUInteger)index{
 	NSData *audioData;
 
-	if ([URLString hasSuffix:@".caf"] || [URLString hasSuffix:@".wav"]) {//播放本机录制的文件
+	if ([URLString hasSuffix:@".caf"] || [URLString hasSuffix:@".wav"] || [URLString hasSuffix:@".mp3"]) {//播放本机录制的文件
 		audioData = [NSData dataWithContentsOfFile:URLString];
 	} else if ([URLString hasSuffix:@".amr"]) {//播放安卓发来的AMR文件
 		audioData = DecodeAMRToWAVE([NSData dataWithContentsOfFile:URLString]);
