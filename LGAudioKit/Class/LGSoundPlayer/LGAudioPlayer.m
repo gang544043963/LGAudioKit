@@ -91,6 +91,14 @@ NSString *const kXMNAudioDataKey;
 	}
 }
 
+- (void)playAudioOnlineWithContentsOfURL:(NSURL *)url{
+    [self stopAudioPlayer];
+    NSData * data = [[NSData alloc] initWithContentsOfURL:url];
+    _audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
+    [_audioPlayer prepareToPlay];
+    [_audioPlayer play];
+}
+
 #pragma mark - Private Methods
 - (NSData *)audioDataFromURLString:(NSString *)URLString atIndex:(NSUInteger)index{
 	NSData *audioData;
