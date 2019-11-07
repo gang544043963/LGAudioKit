@@ -27,9 +27,11 @@ typedef NS_ENUM(NSUInteger, LGAudioPlayerState){
 @property (nonatomic, weak) id<LGAudioPlayerDelegate>delegate;
 
 + (instancetype)sharePlayer;
-
+/// 可播放mp3、caf、wav、amr格式的音频
 - (void)playAudioWithURLString:(NSString *)URLString atIndex:(NSUInteger)index;
 
 - (void)stopAudioPlayer;
+/// 播放在线音频
+- (void)playAudioOnlineWithContentsOfURL:(NSURL *)url;
 
 @end
